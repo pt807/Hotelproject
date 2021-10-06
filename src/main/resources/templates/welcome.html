@@ -1,37 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="fragments/header :: header">
     <title>KYUNGSUNG hotel</title>
-    <LINK href="css/style.css" rel="stylesheet" type="text/css">
-    <style>
-        ul li {list-style-type: none;}
-    </style>
-
 </head>
+
 <body>
-    <style type="text/css">
-        a:link { color: black; text-decoration: none;}
-        a:visited { color: black; text-decoration: none;}
-    </style>
-
-
-    <div class="header">
-        <div class="logo">
-            <a href="/"><img src="img/ksui_2014_19_b.jpg" height="50" width="50"/></a>
-        </div>
-
-        <div class="title">
-            <ul>
-                <li><a href="#">KYUNG SUNG</a></li>
-                <li><a href="#">예약</a></li>
-                <li><a href="#">고객센터</a></li>
-                <li><a href="#">로그인</a></li>
-            </ul>
-            <hr>
-        </div>
-    </div>
-
+<div th:replace="fragments/navbar :: navbar"></div>
     <div class="intro">
                     <span style=" font-weight: 545;font-size: 35px;">
                         <br>KYUNG SUNG IS ETERNAL JOURNEY</span>
@@ -76,15 +50,6 @@
 
         </div>
     </div>
-
-    <footer style="font-weight: 300; font-size: 15px; text-align: center">
-        <nav>
-            <hr><br><a href='https://github.com/hunbk/First-Project' target='_blank'>
-            <img src="https://img.icons8.com/material-outlined/24/000000/github.png"/></a>
-        </nav>
-        <span>대표 : 김병훈, 박대준</span><br/>
-        <span>이메일 : qwe@naver.com</span><br/>
-        <span>Copyright 2022. ptbh. All Rights Reserved.</span>
-    </footer>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
