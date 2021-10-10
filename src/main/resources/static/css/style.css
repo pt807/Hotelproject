@@ -29,3 +29,6 @@
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
 }
+
+.id_ok{color:#000000; display: none;}
+.id_already{color: red; display: none;}

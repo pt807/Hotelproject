@@ -4,8 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MemberController {
@@ -34,5 +33,44 @@ public class MemberController {
             return "members/login";
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/member/join")
+    public String showJoin(Model model) {
+        model.addAttribute("joinForm", new JoinForm());
+        return "members/join";
+    }
+
+    @PostMapping("/member/join")
+    public String join(@Validated JoinForm joinForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "members/join";
+        }
+        Member findMember = memberRepository.findByLoginId(joinForm.getLoginId()).orElse(null);
+        if (findMember != null) {
+            bindingResult.reject("duplication err", "아이디 중복");
+            return "members/join";
+        }
+        Member member = new Member();
+        member.setLoginId(joinForm.getLoginId());
+        member.setPassword(joinForm.getPassword());
+        member.setName(joinForm.getName());
+        member.setEmail(joinForm.getEmail());
+        member.setTelephone(joinForm.getTelephone());
+        memberRepository.save(member);
+        return "redirect:/member/login";
+    }
+
+    @PostMapping("/member/join/checkId")
+    @ResponseBody
+    public boolean checkId(@RequestParam("id") String id) {
+        boolean isDuplicate;
+        Member member = memberRepository.findByLoginId(id).orElse(null);
+        if (member == null) {
+            isDuplicate = false;
+        } else {
+            isDuplicate = true;
+        }
+        return isDuplicate;
     }
 }
