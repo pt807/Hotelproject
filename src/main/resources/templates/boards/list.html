@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>board</title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div>
+
+    <div style="padding: 10px; text-align: center;">
+        <h1><a th:href="@{/Board/list}" style="text-decoration: none;">고객센터</a></h1>
+    </div>
+    <div>
+        <table>
+            <thead style="text-align: center;">
+            <tr>
+                <th style="text-align: center;">순서</th>
+                <th style="text-align: center;">작성자</th>
+                <th style="text-align: center;">제목</th>
+                <th style="text-align: center;">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data : ${listForm}">
+                <td th:text="${data.boardNo}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${data.writer}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${data.title}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${data.creatTime}" style="cursor: pointer; text-align: center;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="text-align: right;">
+        <button onclick="location.href='/fileBoard/insert'">글작성</button>
+    </div>
+
+    <br/><br/><br/>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
