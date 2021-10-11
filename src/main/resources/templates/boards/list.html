@@ -8,7 +8,7 @@
 <div>
 
     <div style="padding: 10px; text-align: center;">
-        <h1><a th:href="@{/Board/list}" style="text-decoration: none;">고객센터</a></h1>
+        <h1><a th:href="@{/Boards/list}" style="text-decoration: none;">고객센터</a></h1>
     </div>
     <div>
         <table>
@@ -21,18 +21,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="data : ${listForm}">
-                <td th:text="${data.boardNo}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${data.writer}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${data.title}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${data.creatTime}" style="cursor: pointer; text-align: center;"></td>
+            <tr th:each="board : ${boards}">
+                <td th:text="${board.boardNo}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${board.writer}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${board.title}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:dd')}" style="cursor: pointer; text-align: center;"></td>
             </tr>
             </tbody>
         </table>
     </div>
 
     <div style="text-align: right;">
-        <button onclick="location.href='/fileBoard/insert'">글작성</button>
+        <button onclick="location.href='/board/post'">글작성</button>
     </div>
 
     <br/><br/><br/>

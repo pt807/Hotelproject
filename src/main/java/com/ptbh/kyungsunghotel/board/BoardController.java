@@ -19,7 +19,7 @@ public class BoardController {
         this.boardRepository = boardRepository;
     }
 
-    @GetMapping("/board")
+    @GetMapping("/board/list")
     public String showList(@SessionAttribute(name = SessionConstants.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
         if (loginMember != null) {
             model.addAttribute("member", loginMember);
