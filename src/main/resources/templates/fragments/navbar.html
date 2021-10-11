@@ -7,8 +7,10 @@
         <ul>
             <li><a href="#">KYUNG SUNG</a></li>
             <li><a href="#">예약</a></li>
-            <li><a href="/board/list">고객센터</a></li>
-            <li><a href="/member/login">로그인</a></li>
+            <li><a href="/board">고객센터</a></li>
+            <li th:if="!${member}"><a href="/member/login">로그인</a></li>
+            <li th:if="${member}"><a th:text="${member.name}" href="/">memberName</a></li>
+            <li th:if="${member}"><a href="/member/logout">로그아웃</a></li>
         </ul>
         <hr>
     </div>

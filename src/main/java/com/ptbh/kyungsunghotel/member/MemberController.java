@@ -6,6 +6,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class MemberController {
     private final MemberRepository memberRepository;
@@ -21,17 +24,30 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public String login(@Validated LoginForm loginForm, BindingResult bindingResult) {
+    public String login(@Validated LoginForm loginForm, BindingResult bindingResult,
+                        HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "members/login";
         }
+
         Member member = memberRepository.findByLoginId(loginForm.getLoginId())
                 .filter(m -> m.getPassword().equals(loginForm.getPassword()))
                 .orElse(null);
+
         if (member == null) {
             bindingResult.reject("loginFail", "로그인 정보가 올바르지 않습니다.");
             return "members/login";
         }
+
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConstants.LOGIN_MEMBER, member);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/member/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute(SessionConstants.LOGIN_MEMBER);
         return "redirect:/";
     }
 
@@ -46,11 +62,14 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "members/join";
         }
+
         Member findMember = memberRepository.findByLoginId(joinForm.getLoginId()).orElse(null);
+
         if (findMember != null) {
             bindingResult.reject("duplication err", "아이디 중복");
             return "members/join";
         }
+
         Member member = new Member();
         member.setLoginId(joinForm.getLoginId());
         member.setPassword(joinForm.getPassword());
