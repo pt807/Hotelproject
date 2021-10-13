@@ -13,6 +13,7 @@
     <div>
         <form role="form" th:object="${postForm}" th:action="@{/board/post}"
               method="post" enctype="multipart/form-data">
+
             <div>
                 <label for="title" style="font-weight: bolder;">제목</label>
                 <input type="text" th:field="*{title}" id="title" name="title"
@@ -23,6 +24,10 @@
                 <textarea th:field="*{content}" id="content" name="content" rows="15" cols="50"
                           placeholder="내용을 입력하세요" required="required"></textarea>
             </div>
+            <div>
+
+            </div>
+
             <div>
                 <input type="file" name="files">
             </div>
@@ -35,6 +40,9 @@
     </div>
     <br/><br/><br/>
 </div>
+
+
+
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

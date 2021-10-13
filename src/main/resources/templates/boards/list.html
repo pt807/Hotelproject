@@ -20,7 +20,6 @@
                 <th style="text-align: center;">작성일</th>
             </tr>
             </thead>
-            <tbody>
             <tr th:each="board : ${boards}">
                 <td th:text="${board.boardNo}" style="cursor: pointer; text-align: center;"></td>
                 <td th:text="${board.writer}" style="cursor: pointer; text-align: center;"></td>
@@ -31,7 +30,7 @@
         </table>
     </div>
 
-    <div style="text-align: right;">
+    <div th:if ="${session.loginMember != null}"; style="text-align: right">
         <button onclick="location.href='/board/post'">글작성</button>
     </div>
 
