@@ -42,19 +42,19 @@ public class BoardController {
     }
 
     @PostMapping("/board/post")
-    public String post(@Validated PostForm postForm, BindingResult bindingResult, HttpSession session) {
+    public String post(@Validated PostForm postForm, BindingResult bindingResult,
+                       @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member) {
         if (bindingResult.hasErrors()) {
             return "/boards/post";
         }
         Board board = new Board();
-       // board.setWriter(session.getId());
+        board.setWriter(member.getLoginId());
         board.setTitle(postForm.getTitle());
         board.setContent(postForm.getContent());
         board.setCreateTime(LocalDateTime.now());
         boardRepository.save(board);
         return "redirect:/board/list";
     }
-
 
 }
 
