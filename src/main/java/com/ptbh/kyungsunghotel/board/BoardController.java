@@ -2,19 +2,14 @@ package com.ptbh.kyungsunghotel.board;
 
 
 import com.ptbh.kyungsunghotel.member.Member;
-import com.ptbh.kyungsunghotel.member.MemberRepository;
 import com.ptbh.kyungsunghotel.member.SessionConstants;
-import org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Controller
@@ -26,10 +21,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String showList(@SessionAttribute(name = SessionConstants.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
-        if (loginMember != null) {
-            model.addAttribute("member", loginMember);
-        }
+    public String showList(Model model) {
         List<Board> boards = boardRepository.findAll();
         model.addAttribute("boards", boards);
         return "boards/list";

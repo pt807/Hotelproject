@@ -24,7 +24,7 @@
                 <td th:text="${board.boardNo}" style="cursor: pointer; text-align: center;"></td>
                 <td th:text="${board.writer}" style="cursor: pointer; text-align: center;"></td>
                 <td th:text="${board.title}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:dd')}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}" style="cursor: pointer; text-align: center;"></td>
             </tr>
             </tbody>
         </table>
