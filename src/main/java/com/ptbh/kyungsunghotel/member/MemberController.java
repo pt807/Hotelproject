@@ -46,8 +46,9 @@ public class MemberController {
     }
 
     @GetMapping("/member/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute(SessionConstants.LOGIN_MEMBER);
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        request.getSession(true);
         return "redirect:/";
     }
 
@@ -92,4 +93,104 @@ public class MemberController {
         }
         return isDuplicate;
     }
+
+    // 회원 정보 조회
+    @GetMapping("/member/info")
+    public String showMemberInfo(@SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member, Model model) {
+        model.addAttribute("member", member);
+        return "members/memberInfo";
+    }
+
+    // 회원 정보 수정
+    @GetMapping("/member/update")
+    public String showMemberUpdateForm(@SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member, Model model) {
+        UpdateForm updateForm = new UpdateForm();
+        updateForm.setName(member.getName());
+        updateForm.setEmail(member.getEmail());
+        updateForm.setTelephone(member.getTelephone());
+        model.addAttribute("updateForm", updateForm);
+        return "members/memberUpdateForm";
+    }
+
+    // 매개변수 순서를 지키지 않으면 @Validated 검증을 받을 수 없음!!
+    // @Validated, BindingResult 를 순서대로 선언
+    @PostMapping("/member/update")
+    public String updateMember(@Validated UpdateForm updateForm,
+                               BindingResult bindingResult,
+                               @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member) {
+        if (bindingResult.hasErrors()) {
+            return "members/memberUpdateForm";
+        }
+
+        member.setName(updateForm.getName());
+        member.setEmail(updateForm.getEmail());
+        member.setTelephone(updateForm.getTelephone());
+        memberRepository.save(member);
+        return "redirect:/member/info";
+    }
+
+    @GetMapping("/member/changePassword")
+    public String showChangePasswordForm(Model model) {
+        model.addAttribute("passwordForm", new PasswordForm());
+        return "members/changePasswordForm";
+    }
+
+    // 매개변수 순서를 지키지 않으면 @Validated 검증을 받을 수 없음!!
+    // @Validated, BindingResult 를 순서대로 선언
+    @PostMapping("/member/changePassword")
+    public String changePassword(@Validated PasswordForm passwordForm,
+                                 BindingResult bindingResult,
+                                 @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member
+                                 ) {
+        if (bindingResult.hasErrors()) {
+            return "members/changePasswordForm";
+        }
+
+        if (!passwordForm.getOldPassword().equals(member.getPassword())) {
+            bindingResult.reject("incorrectPassword", "기존 비밀번호가 일치하지 않습니다.");
+            return "members/changePasswordForm";
+        }
+
+        if (!passwordForm.getNewPassword().equals(passwordForm.getCheckNewPassword())) {
+            bindingResult.reject("differentNewPassword", "새 비밀번호가 일치하지 않습니다.");
+            return "members/changePasswordForm";
+        }
+
+        member.setPassword(passwordForm.getNewPassword());
+        memberRepository.save(member);
+        return "redirect:/";
+    }
+
+    // 회원 탈퇴
+    @GetMapping("/member/withdraw")
+    public String showWithdraw(Model model) {
+        model.addAttribute("loginForm", new LoginForm());
+        return "members/withdraw";
+    }
+
+    @PostMapping("/member/withdraw")
+    public String withdraw(@Validated LoginForm loginForm,
+                           BindingResult bindingResult,
+                           @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("################ has errors");
+            return "members/withdraw";
+        }
+
+        if (!member.getLoginId().equals(loginForm.getLoginId())) {
+            System.out.println("################ loginIdFail");
+            bindingResult.reject("loginIdFail", "아이디가 일치하지 않습니다.");
+            return "members/withdraw";
+        }
+
+        if (!member.getPassword().equals(loginForm.getPassword())) {
+            System.out.println("################ passwordFail");
+            bindingResult.reject("passwordFail", "비밀번호가 일치하지 않습니다.");
+            return "members/withdraw";
+        }
+
+        memberRepository.delete(member);
+        return "redirect:/member/logout";
+    }
+
 }
