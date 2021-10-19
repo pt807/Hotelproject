@@ -6,11 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
-public class PostForm {
+public class PostViewForm {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,17 +19,14 @@ public class PostForm {
     private String writer;
 
     @Column
-    @NotBlank(message = "제목은 필수입니다")
     private String title;
 
     @Column
-    @NotBlank(message = "내용은 필수입니다")
     private String content;
 
     @Column
     private LocalDateTime createTime;
 
-    public PostForm() {
+    public PostViewForm() {
     }
-
 }

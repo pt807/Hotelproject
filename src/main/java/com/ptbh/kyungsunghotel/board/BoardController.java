@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 import java.util.List;
@@ -47,6 +49,42 @@ public class BoardController {
         boardRepository.save(board);
         return "redirect:/board/list";
     }
+
+    @GetMapping("/board/{boardNo}")
+    public String postView(@PathVariable("boardNo") Integer boardNo, Model model){
+        PostViewForm postViewForm = new PostViewForm();
+        Board board = boardRepository.findById(boardNo).orElse(null);
+        postViewForm.setBoardNo(board.getBoardNo());
+        postViewForm.setWriter(board.getWriter());
+        postViewForm.setContent(board.getContent());
+        postViewForm.setTitle(board.getTitle());
+        postViewForm.setCreateTime(board.getCreateTime());
+        model.addAttribute("postView", postViewForm);
+        return "/boards/postView";
+    }
+
+    @GetMapping("/board/postUpdate/{boardNo}")
+    public String showPostUpdate(@PathVariable("boardNo") Integer boardNo, Model model){
+        PostUpdateForm postUpdateForm = new PostUpdateForm();
+        Board board = boardRepository.findById(boardNo).orElse(null);
+        postUpdateForm.setTitle(board.getTitle());
+        postUpdateForm.setContent(board.getContent());
+        model.addAttribute("postUpdate", postUpdateForm);
+        return "boards/postUpdate";
+    }
+
+    @PostMapping("/board/postUpdate/{boardNo}")
+    public String postUpdate(@Validated PostUpdateForm postUpdateForm,
+                             BindingResult bindingResult, Board board){
+        if(bindingResult.hasErrors()){
+            return "boards/postUpdate";
+        }
+        board.setTitle(postUpdateForm.getTitle());
+        board.setContent(postUpdateForm.getContent());
+        boardRepository.save(board);
+        return "redirect:/board/postView";
+    }
+
 
 }
 

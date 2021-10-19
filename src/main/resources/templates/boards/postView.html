@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>postView</title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div>
+    <div style="padding: 10px; text-align: center;">
+        <h1><a th:href="@{/board/postView}" style="text-decoration: none;">게시글</a></h1>
+    </div>
+
+    <div>
+        <div>
+                <div>
+                    <label style="font-weight: bolder;">작성자</label>
+                    <p th:text="${postView.writer}"></p>
+                </div>
+                <div>
+                    <label style="font-weight: bolder;">제목</label>
+                    <p th:text="${postView.title}"></p>
+                </div>
+                <div>
+                    <label style="font-weight: bolder;">내용</label>
+                    <p th:text="${postView.content}"></p>
+                </div>
+                <div>
+                    <label style="font-weight: bolder;">작성일자</label>
+                    <p th:text="${#temporals.format(postView.createTime, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                </div>
+                <div style="text-align: right;">
+                    <input type="button" th:value="목록" onclick="location.href='/board/list';" >
+                    <button type="button" th:if="${#strings.equals(session.loginMember.loginId, postView.writer)}"
+                                th:onclick="|location.href='@{/board/postUpdate/{boardNo}(boardNo=${postView.boardNo})}'|">수정</button>
+
+                </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
-    <title>board</title>
+    <title>postUpdate</title>
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div>
     <div style="padding: 10px; text-align: center;">
-        <h1><a th:href="@{/board/post}" style="text-decoration: none;">게시글작성</a></h1>
+        <h1><a th:href="@{/board/postUpdate/}" style="text-decoration: none;">게시글수정</a></h1>
     </div>
 
     <div>
-        <form role="form" th:object="${postForm}" th:action="@{/board/post}"
+        <form role="form" th:object="${postUpdate}" th:action="@{/board/postUpdate/{boardNo}}"
               method="post" enctype="multipart/form-data">
 
             <div>
                 <label for="title" style="font-weight: bolder;">제목</label>
                 <input type="text" th:field="*{title}" id="title" name="title"
-                       placeholder="제목을 입력하세요" required="required">
+                       placeholder="수정할 제목을 입력하세요" required="required">
             </div>
             <div style="font-weight: bolder;">
                 <label for="content">내용</label><br/>
                 <textarea th:field="*{content}" id="content" name="content" rows="15" cols="50"
-                          placeholder="내용을 입력하세요" required="required"></textarea>
+                          placeholder="수정할 내용을 입력하세요" required="required"></textarea>
             </div>
 
 

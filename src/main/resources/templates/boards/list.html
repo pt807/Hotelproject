@@ -21,10 +21,10 @@
             </tr>
             </thead>
             <tr th:each="board : ${boards}">
-                <td th:text="${board.boardNo}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${board.writer}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${board.title}" style="cursor: pointer; text-align: center;"></td>
-                <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}" style="cursor: pointer; text-align: center;"></td>
+                <td th:text="${board.boardNo}"></td>
+                <td th:text="${board.writer}"></td>
+                <td style="cursor: pointer; text-align: center;"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
+                <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
             </tbody>
         </table>
