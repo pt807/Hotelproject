@@ -7,7 +7,7 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 <div>
     <div style="padding: 10px; text-align: center;">
-        <h1><a th:href="@{/board/postView}" style="text-decoration: none;">게시글</a></h1>
+        <h1><a style="text-decoration: none;">게시글</a></h1>
     </div>
 
     <div>
@@ -29,10 +29,12 @@
                     <p th:text="${#temporals.format(postView.createTime, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 </div>
                 <div style="text-align: right;">
-                    <input type="button" th:value="목록" onclick="location.href='/board/list';" >
-                    <button type="button" th:if="${#strings.equals(session.loginMember.loginId, postView.writer)}"
-                                th:onclick="|location.href='@{/board/postUpdate/{boardNo}(boardNo=${postView.boardNo})}'|">수정</button>
-
+                    <button type="button" onclick="location.href='/board/list';" >목록</button>
+                    <div th:if="${session.loginMember != null}">
+                    <div th:if="${#strings.equals(session.loginMember.loginId, postView.writer)}">
+                        <button type="button" th:onclick="|location.href='@{/board/postUpdate/{boardNo}(boardNo=${postView.boardNo})}'|">수정</button>
+                    </div>
+                    </div>
                 </div>
         </div>
     </div>

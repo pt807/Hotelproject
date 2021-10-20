@@ -67,6 +67,7 @@ public class BoardController {
     public String showPostUpdate(@PathVariable("boardNo") Integer boardNo, Model model){
         PostUpdateForm postUpdateForm = new PostUpdateForm();
         Board board = boardRepository.findById(boardNo).orElse(null);
+        postUpdateForm.setBoardNo(board.getBoardNo());
         postUpdateForm.setTitle(board.getTitle());
         postUpdateForm.setContent(board.getContent());
         model.addAttribute("postUpdate", postUpdateForm);
@@ -74,15 +75,17 @@ public class BoardController {
     }
 
     @PostMapping("/board/postUpdate/{boardNo}")
-    public String postUpdate(@Validated PostUpdateForm postUpdateForm,
-                             BindingResult bindingResult, Board board){
+    public String postUpdate(@PathVariable("boardNo") Integer boardNo,
+                             @Validated PostUpdateForm postUpdateForm,
+                             BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "boards/postUpdate";
         }
+        Board board = boardRepository.findById(boardNo).orElse(null);
         board.setTitle(postUpdateForm.getTitle());
         board.setContent(postUpdateForm.getContent());
         boardRepository.save(board);
-        return "redirect:/board/postView";
+        return "redirect:/board/" +boardNo;
     }
 
 

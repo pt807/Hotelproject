@@ -7,11 +7,11 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 <div>
     <div style="padding: 10px; text-align: center;">
-        <h1><a th:href="@{/board/postUpdate/}" style="text-decoration: none;">게시글수정</a></h1>
+        <h1><a style="text-decoration: none;">게시글수정</a></h1>
     </div>
 
     <div>
-        <form role="form" th:object="${postUpdate}" th:action="@{/board/postUpdate/{boardNo}}"
+        <form role="form" th:object="${postUpdate}" th:action="@{/board/postUpdate/{boardNo}(boardNo=${postUpdate.boardNo})}"
               method="post" enctype="multipart/form-data">
 
             <div>
@@ -28,14 +28,13 @@
 
             <div style="text-align: right;">
                 <input type="button" th:value="목록" onclick="location.href='/board/list';" >
-                <input type="submit" th:value="작성">
+
+                <button type="submit">수정</button>
             </div>
         </form>
     </div>
     <br/><br/><br/>
 </div>
-
-
 
 <div th:replace="fragments/footer :: footer"></div>
 </body>
