@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+
 import java.time.LocalDateTime;
 
 import java.util.List;
@@ -88,6 +88,12 @@ public class BoardController {
         return "redirect:/board/" +boardNo;
     }
 
+    @GetMapping("/board/postDelete/{boardNo}")
+    public String postDelete(@PathVariable("boardNo") Integer boardNo){
+        Board board = boardRepository.findById(boardNo).orElse(null);
+        boardRepository.delete(board);
+        return  "redirect:/board/list";
+    }
 
 }
 

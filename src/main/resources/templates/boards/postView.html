@@ -30,11 +30,12 @@
                 </div>
                 <div style="text-align: right;">
                     <button type="button" onclick="location.href='/board/list';" >목록</button>
-                    <div th:if="${session.loginMember != null}">
-                    <div th:if="${#strings.equals(session.loginMember.loginId, postView.writer)}">
+                    <th:block th:if="${session.loginMember != null and #strings.equals(session.loginMember.loginId, postView.writer)}">
                         <button type="button" th:onclick="|location.href='@{/board/postUpdate/{boardNo}(boardNo=${postView.boardNo})}'|">수정</button>
-                    </div>
-                    </div>
+                    </th:block>
+                    <th:block th:if="${session.loginMember != null and #strings.equals(session.loginMember.loginId, postView.writer)}">
+                        <button type="button" th:onclick="|location.href='@{/board/postDelete/{boardNo}(boardNo=${postView.boardNo})}'|">삭제</button>
+                    </th:block>
                 </div>
         </div>
     </div>
