@@ -94,7 +94,6 @@ public class BoardController {
         boardRepository.delete(board);
         return  "redirect:/board/list";
     }
-
 }
 
 
