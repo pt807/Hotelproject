@@ -1,6 +1,5 @@
 package com.ptbh.kyungsunghotel.board;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

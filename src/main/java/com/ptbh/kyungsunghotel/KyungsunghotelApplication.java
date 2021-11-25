@@ -26,7 +26,7 @@ public class KyungsunghotelApplication {
 	public CommandLineRunner runner(MemberRepository memberRepository, BoardRepository boardRepository) throws Exception {
 		return (args) -> {
 			memberRepository.save(Member.builder().loginId("test").password("test").name("홍길동").email("test@test.com").telephone("01012345678").build());
-			IntStream.rangeClosed(1, 10).forEach(index ->
+			IntStream.rangeClosed(1, 300).forEach(index ->
 					boardRepository.save(Board.builder()
 							.writer("홍길동")
 							.title("게시글 " + index)

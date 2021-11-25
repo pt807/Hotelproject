@@ -26,9 +26,17 @@
                 <td style="cursor: pointer; text-align: center;"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
                 <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
-            </tbody>
         </table>
     </div>
+
+    <a th:if="${nowPage > 1}" th:href="@{/board/list?page=0}">&laquo;</a>
+    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2)}">&lsaquo;</a>
+    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1})}" th:text="${page}"></a>
+        <strong th:if="${page == nowPage}"  th:text="${page}"></strong>
+    </th:block>
+        <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage})}">&rsaquo;</a>
+        <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage} -1)}">&raquo;</a>
 
     <div th:if ="${session.loginMember != null}"; style="text-align: right">
         <button onclick="location.href='/board/post'">글작성</button>

@@ -1,18 +1,18 @@
 package com.ptbh.kyungsunghotel.board;
 
-
 import com.ptbh.kyungsunghotel.member.Member;
 import com.ptbh.kyungsunghotel.member.SessionConstants;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.time.LocalDateTime;
 
-import java.util.List;
 
 @Controller
 public class BoardController {
@@ -23,9 +23,22 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String showList(Model model) {
-        List<Board> boards = boardRepository.findAll();
+    public String showList(Model model, @PageableDefault(page = 0, size = 20, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Board> boards = boardRepository.findAll(pageable);
+
+        int pageBlock = 10;
+        int totalPage = boards.getTotalPages();
+        int nowPage = boards.getPageable().getPageNumber() + 1; // == pageable.getPageNumber 현재페이지 가져오기
+        int startPage = ((nowPage)/pageBlock) * pageBlock + 1;
+        int endPage = startPage + pageBlock - 1;
+        if(endPage > totalPage) endPage = totalPage;  // endPage= totalPage<endPage? totalPage:endPage;
+
         model.addAttribute("boards", boards);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPage", totalPage);
+
         return "boards/list";
     }
 
