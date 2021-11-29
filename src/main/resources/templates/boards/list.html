@@ -29,21 +29,30 @@
         </table>
     </div>
 
-    <a th:if="${nowPage > 1}" th:href="@{/board/list?page=0}">&laquo;</a>
-    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2)}">&lsaquo;</a>
+    <form class="search" method="get" th:action="@{/board/list}">
+        <div class="search box">
+            <input type="text" class="box" id="searchText" name="searchText" th:value="${param.searchText}">
+        </div>
+        <div class="search button">
+            <button type="submit" class="button">검색</button>
+        </div>
+    </form>
+
+    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=0, searchText=${param.searchText})}">&laquo;</a>
+    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2, searchText=${param.searchText})}">&lsaquo;</a>
 
     <th:block th:if="${nowPage <= 6}" th:each ="i : ${#numbers.sequence(1, 10)}">
-        <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1})}" th:text="${i}"></a>
+        <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchText=${param.searchText})}" th:text="${i}"></a>
         <strong th:if="${i == nowPage}"  th:text="${i}"></strong>
     </th:block>
 
     <th:block th:if="${nowPage > 6}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1})}" th:text="${page}"></a>
+        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchText=${param.searchText})}" th:text="${page}"></a>
         <strong th:if="${page == nowPage}"  th:text="${page}"></strong>
     </th:block>
 
-    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage})}">&rsaquo;</a>
-    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage - 1})}">&raquo;</a>
+    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage}, searchText=${param.searchText})}">&rsaquo;</a>
+    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage - 1}, searchText=${param.searchText})}">&raquo;</a>
 
 
     <div th:if ="${session.loginMember != null}"; style="text-align: right">
