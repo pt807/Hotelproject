@@ -26,11 +26,10 @@ public class BoardController {
     public String showList(Model model, @PageableDefault(page = 0, size = 20, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Board> boards = boardRepository.findAll(pageable);
 
-        int pageBlock = 10;
         int totalPage = boards.getTotalPages();
         int nowPage = boards.getPageable().getPageNumber() + 1; // == pageable.getPageNumber 현재페이지 가져오기
-        int startPage = ((nowPage)/pageBlock) * pageBlock + 1;
-        int endPage = startPage + pageBlock - 1;
+        int startPage = Math.max(1, boards.getPageable().getPageNumber()-4); //((nowPage)/pageBlock) * pageBlock + 1;
+        int endPage = Math.min(boards.getTotalPages(),boards.getPageable().getPageNumber()+5); //startPage + pageBlock - 1;
         if(endPage > totalPage) endPage = totalPage;  // endPage= totalPage<endPage? totalPage:endPage;
 
         model.addAttribute("boards", boards);
