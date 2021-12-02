@@ -10,6 +10,9 @@
     <div style="padding: 10px; text-align: center;">
         <h1><a style="text-decoration: none;">고객센터</a></h1>
     </div>
+
+    <div>총 건수 : <span th:text="${cnt}"></span> </div>
+    <br>
     <div>
         <table>
             <thead style="text-align: center;">
@@ -28,6 +31,7 @@
             </tr>
         </table>
     </div>
+    <br>
 
     <form class="search" method="get" th:action="@{/board/list}">
         <div class="search box">
@@ -37,6 +41,7 @@
             <button type="submit" class="button">검색</button>
         </div>
     </form>
+    <br>
 
     <a th:if="${nowPage > 1}" th:href="@{/board/list(page=0, searchText=${param.searchText})}">&laquo;</a>
     <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2, searchText=${param.searchText})}">&lsaquo;</a>

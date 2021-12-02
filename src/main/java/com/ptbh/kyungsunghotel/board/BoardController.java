@@ -26,15 +26,18 @@ public class BoardController {
     @GetMapping("/board/list")
     public String showList(Model model, @PageableDefault(page = 0, size = 20, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable,
                            @RequestParam(required = false, defaultValue = "") String searchText) {
+
         //Page<Board> boards = boardRepository.findAll(pageable);
         Page<Board> boards = boardRepository.findByTitleContainingOrContentContainingOrWriterContaining(searchText, searchText, searchText, pageable);
+        int cnt = (int) boards.getTotalElements();
         int totalPage = boards.getTotalPages();
         int nowPage = boards.getPageable().getPageNumber() + 1; // == pageable.getPageNumber 현재페이지 가져오기
-        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4); //((nowPage)/pageBlock) * pageBlock + 1;
-        int endPage = Math.min(totalPage, boards.getPageable().getPageNumber() + 5); //startPage + pageBlock - 1;
+        int startPage = Math.max(1, nowPage - 5); //((nowPage)/pageBlock) * pageBlock + 1;
+        int endPage = Math.min(totalPage, nowPage + 4); //startPage + pageBlock - 1;
         if (endPage > totalPage) endPage = totalPage;  // endPage= totalPage<endPage? totalPage:endPage;
 
         model.addAttribute("boards", boards);
+        model.addAttribute("cnt", cnt);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
