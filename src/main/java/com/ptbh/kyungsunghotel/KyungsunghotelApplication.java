@@ -28,7 +28,7 @@ public class KyungsunghotelApplication {
 			memberRepository.save(Member.builder().loginId("test").password("test").name("홍길동").email("test@test.com").telephone("01012345678").build());
 			IntStream.rangeClosed(1, 300).forEach(index ->
 					boardRepository.save(Board.builder()
-							.writer("홍길동")
+							.member(memberRepository.findByLoginId("test").orElse(null))
 							.title("게시글 " + index)
 							.content("내용" + index)
 							.createTime(LocalDateTime.now())

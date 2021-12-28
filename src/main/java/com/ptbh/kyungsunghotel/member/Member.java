@@ -11,10 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Member {
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(name = "loginId")
     @NotBlank(message = "아이디는 필수입니다")
     private String loginId;
 

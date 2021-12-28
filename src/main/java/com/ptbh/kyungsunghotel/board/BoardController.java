@@ -28,7 +28,7 @@ public class BoardController {
                            @RequestParam(required = false, defaultValue = "") String searchText) {
 
         //Page<Board> boards = boardRepository.findAll(pageable);
-        Page<Board> boards = boardRepository.findByTitleContainingOrContentContainingOrWriterContaining(searchText, searchText, searchText, pageable);
+        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
         int cnt = (int) boards.getTotalElements();
         int totalPage = boards.getTotalPages();
         int nowPage = boards.getPageable().getPageNumber() + 1; // == pageable.getPageNumber 현재페이지 가져오기
@@ -59,7 +59,7 @@ public class BoardController {
             return "/boards/post";
         }
         Board board = new Board();
-        board.setWriter(member.getLoginId());
+        board.setMember(member);
         board.setTitle(postForm.getTitle());
         board.setContent(postForm.getContent());
         board.setCreateTime(LocalDateTime.now());
@@ -72,7 +72,7 @@ public class BoardController {
         PostViewForm postViewForm = new PostViewForm();
         Board board = boardRepository.findById(boardNo).orElse(null);
         postViewForm.setBoardNo(board.getBoardNo());
-        postViewForm.setWriter(board.getWriter());
+        postViewForm.setWriter(board.getMember().getName());
         postViewForm.setContent(board.getContent());
         postViewForm.setTitle(board.getTitle());
         postViewForm.setCreateTime(board.getCreateTime());

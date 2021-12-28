@@ -1,5 +1,6 @@
 package com.ptbh.kyungsunghotel.board;
 
+import com.ptbh.kyungsunghotel.member.Member;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,9 +17,6 @@ public class Board {
     private Integer boardNo;
 
     @Column
-    private String writer;
-
-    @Column
     @NotBlank(message = "제목은 필수입니다")
     private String title;
 
@@ -29,12 +27,16 @@ public class Board {
     @Column
     private LocalDateTime createTime;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "loginId")
+    private Member member;
+
     public Board() {
     }
 
     @Builder
-    public Board(String writer, String title, String content, LocalDateTime createTime) {
-        this.writer = writer;
+    public Board(Member member, String title, String content, LocalDateTime createTime) {
+        this.member = member;
         this.title = title;
         this.content = content;
         this.createTime = createTime;

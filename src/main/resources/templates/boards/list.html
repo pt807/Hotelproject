@@ -25,7 +25,7 @@
             </thead>
             <tr th:each="board : ${boards}">
                 <td th:text="${board.boardNo}"></td>
-                <td th:text="${board.writer}"></td>
+                <td th:text="${board.getMember().getName()}"></td>
                 <td style="cursor: pointer; text-align: center;"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
                 <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
