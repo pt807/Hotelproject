@@ -25,12 +25,21 @@ public class BoardController {
 
     @GetMapping("/board/list")
     public String showList(Model model, @PageableDefault(page = 0, size = 20, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable,
+                           @RequestParam(required = false, defaultValue = "") String searchField,
                            @RequestParam(required = false, defaultValue = "") String searchText) {
 
-        //Page<Board> boards = boardRepository.findAll(pageable);
-        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
+        Page<Board> boards = boardRepository.findAll(pageable);
+
+        if (searchField.equals("title")) {
+            boards = boardRepository.findByTitleContaining(searchText, pageable);
+        } else if (searchField.equals("title2")) {
+            boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
+        } else if (searchField.equals("writer")) {
+            boards = boardRepository.findByMember_LoginId(searchText, pageable);
+        }
+
         int cnt = (int) boards.getTotalElements();
-        int totalPage = boards.getTotalPages();
+        int totalPage = Math.max(1, boards.getTotalPages());
         int nowPage = boards.getPageable().getPageNumber() + 1; // == pageable.getPageNumber 현재페이지 가져오기
         int startPage = Math.max(1, nowPage - 5); //((nowPage)/pageBlock) * pageBlock + 1;
         int endPage = Math.min(totalPage, nowPage + 4); //startPage + pageBlock - 1;
@@ -73,6 +82,7 @@ public class BoardController {
         Board board = boardRepository.findById(boardNo).orElse(null);
         postViewForm.setBoardNo(board.getBoardNo());
         postViewForm.setWriter(board.getMember().getName());
+        postViewForm.setLoginId(board.getMember().getLoginId());
         postViewForm.setContent(board.getContent());
         postViewForm.setTitle(board.getTitle());
         postViewForm.setCreateTime(board.getCreateTime());

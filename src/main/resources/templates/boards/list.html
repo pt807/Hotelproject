@@ -34,6 +34,12 @@
     <br>
 
     <form class="search" method="get" th:action="@{/board/list}">
+    <select name="searchField" th:value="${param.searchField}">
+        <option value="title">제목검색</option>
+        <option value="title2">제목+내용</option>
+        <option value="writer">작성자검색</option>
+    </select>
+
         <div class="search box">
             <input type="text" class="box" id="searchText" name="searchText" th:value="${param.searchText}">
         </div>
@@ -43,29 +49,30 @@
     </form>
     <br>
 
-    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=0, searchText=${param.searchText})}">&laquo;</a>
-    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2, searchText=${param.searchText})}">&lsaquo;</a>
+    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=0, searchField=${param.searchField}, searchText=${param.searchText})}">&laquo;</a>
+    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2, searchField=${param.searchField}, searchText=${param.searchText})}">&lsaquo;</a>
 
     <th:block th:if="${totalPage <= 10}" th:each ="i : ${#numbers.sequence(1, totalPage)}">
+        <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${i}"></a>
         <strong th:if="${i == nowPage}"  th:text="${i}"></strong>
     </th:block>
 
     <th:block th:if="${totalPage > 10}">
 
         <th:block th:if="${nowPage <= 6}" th:each ="i : ${#numbers.sequence(startPage, 10)}">
-            <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchText=${param.searchText})}" th:text="${i}"></a>
+            <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${i}"></a>
             <strong th:if="${i == nowPage}"  th:text="${i}"></strong>
         </th:block>
 
         <th:block th:if="${nowPage > 6}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchText=${param.searchText})}" th:text="${page}"></a>
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}"  th:text="${page}"></strong>
         </th:block>
 
     </th:block>
 
-    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage}, searchText=${param.searchText})}">&rsaquo;</a>
-    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage - 1}, searchText=${param.searchText})}">&raquo;</a>
+    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage}, searchField=${param.searchField}, searchText=${param.searchText})}">&rsaquo;</a>
+    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage - 1}, searchField=${param.searchField}, searchText=${param.searchText})}">&raquo;</a>
 
     <div th:if ="${session.loginMember != null}"; style="text-align: right">
         <button onclick="location.href='/board/post'">글작성</button>

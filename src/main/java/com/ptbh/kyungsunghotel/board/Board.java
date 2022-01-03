@@ -42,5 +42,3 @@ public class Board {
         this.createTime = createTime;
     }
 }
-
-
