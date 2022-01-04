@@ -51,6 +51,7 @@ public class BoardController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("totalPage", totalPage);
+        model.addAttribute("searchField", searchField);
 
         return "boards/list";
     }
