@@ -1,11 +1,14 @@
 
 package com.ptbh.kyungsunghotel.member;
 
+import com.ptbh.kyungsunghotel.board.Board;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,6 +29,9 @@ public class Member {
 
     @NotBlank(message = "전화번호는 필수입니다")
     private String telephone;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Board> boards = new ArrayList<>();
 
     public Member() {
     }

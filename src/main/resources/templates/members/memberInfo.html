@@ -13,8 +13,24 @@
 <button type="button" th:onclick="|location.href='@{/member/changePassword}'|">비밀번호 변경</button>
 <hr>
 <h1>예약 조회</h1>
-
 <!--<button type="button" th:onclick="'location.href=\'' + @{/member/update/{id}(id=${session.loginMember.id})} + '\''">정보수정</button>-->
+<hr>
+
+<h1>내가 쓴 글</h1>
+<div>
+    <table>
+        <thead style="text-align: center;">
+        <tr>
+            <th style="text-align: center;">제목</th>
+            <th style="text-align: center;">작성일</th>
+        </tr>
+        </thead>
+        <tr th:each="board : ${boards}">
+            <td style="cursor: pointer; text-align: center;"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
+            <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</div>
 
 <div th:replace="fragments/footer :: footer"></div>
 </body>
