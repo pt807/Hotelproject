@@ -2,6 +2,7 @@
 package com.ptbh.kyungsunghotel.member;
 
 import com.ptbh.kyungsunghotel.board.Board;
+import com.ptbh.kyungsunghotel.reseve.Reserve;
 import lombok.Builder;
 import lombok.Data;
 
@@ -32,6 +33,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Reserve> reserves = new ArrayList<>();
 
     public Member() {
     }

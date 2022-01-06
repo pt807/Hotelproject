@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>board</title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div>
+
+    <div style="padding: 10px; text-align: center;">
+        <h1><a style="text-decoration: none;">예약</a></h1>
+    </div>
+
+    <div>
+        <form th:action="@{reserve/complete}" method="post">
+            <label>체크인
+            <input type="date" id="nowDate">
+            </label>
+            <label>체크아웃
+            <input type="date">
+            </label>
+            <button type="submit">조회</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('nowDate').valueAsDate = new Date();
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+        let yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("nowDate").setAttribute("min", today);
+    </script>
+
+
+<br/><br/><br/>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

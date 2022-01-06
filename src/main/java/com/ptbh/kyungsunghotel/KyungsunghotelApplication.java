@@ -4,6 +4,8 @@ import com.ptbh.kyungsunghotel.board.Board;
 import com.ptbh.kyungsunghotel.board.BoardRepository;
 import com.ptbh.kyungsunghotel.member.Member;
 import com.ptbh.kyungsunghotel.member.MemberRepository;
+import com.ptbh.kyungsunghotel.room.Room;
+import com.ptbh.kyungsunghotel.room.RoomRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +23,7 @@ public class KyungsunghotelApplication {
 	}
 
 	@Bean
-	public CommandLineRunner runner(MemberRepository memberRepository, BoardRepository boardRepository) throws Exception {
+	public CommandLineRunner runner(MemberRepository memberRepository, BoardRepository boardRepository, RoomRepository roomRepository) throws Exception {
 		return (args) -> {
 			memberRepository.save(Member.builder().loginId("test").password("test").name("홍길동").email("test@test.com").telephone("01012345678").build());
 			IntStream.rangeClosed(1, 300).forEach(index ->
@@ -33,6 +35,12 @@ public class KyungsunghotelApplication {
 							.build()
 					)
 			);
+			for (int i = 1; i <= 5; i++) {
+				roomRepository.save(Room.builder().roomNo("A" + i + "01").state("").build());
+				for (int j = 1; j <= 4; j++) {
+					roomRepository.save(Room.builder().roomNo("A" + i + "0" + j).state("").build());
+				}
+			}
 		};
 	}
 }
