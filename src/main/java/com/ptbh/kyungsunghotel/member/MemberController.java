@@ -1,7 +1,7 @@
 package com.ptbh.kyungsunghotel.member;
 
 import com.ptbh.kyungsunghotel.board.Board;
-import com.ptbh.kyungsunghotel.board.BoardRepository;
+import com.ptbh.kyungsunghotel.reseve.Reserve;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -102,8 +100,11 @@ public class MemberController {
     // 회원 정보 조회
     @GetMapping("/member/info")
     public String showMemberInfo(@SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member, Model model) {
+        List<Reserve> reserves = memberRepository.findByLoginId(member.getLoginId()).orElse(null).getReserves();
         List<Board> boards = memberRepository.findByLoginId(member.getLoginId()).orElse(null).getBoards();
         boards.sort((o1, o2) -> o2.getBoardNo() - o1.getBoardNo());
+
+        model.addAttribute("reserves", reserves);
         model.addAttribute("boards", boards);
         model.addAttribute("member", member);
         return "members/memberInfo";
@@ -149,7 +150,7 @@ public class MemberController {
     public String changePassword(@Validated PasswordForm passwordForm,
                                  BindingResult bindingResult,
                                  @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member
-                                 ) {
+    ) {
         if (bindingResult.hasErrors()) {
             return "members/changePasswordForm";
         }

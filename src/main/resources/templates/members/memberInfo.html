@@ -11,11 +11,25 @@
 </h2>
 <button type="button" th:onclick="|location.href='@{/member/update}'|">정보수정</button>
 <button type="button" th:onclick="|location.href='@{/member/changePassword}'|">비밀번호 변경</button>
+
 <hr>
 <h1>예약 조회</h1>
-<!--<button type="button" th:onclick="'location.href=\'' + @{/member/update/{id}(id=${session.loginMember.id})} + '\''">정보수정</button>-->
-<hr>
+<table width="300">
+    <thead style="text-align: center;">
+    <tr>
+        <th width="100" style="text-align: center;">체크인</th>
+        <th width="100" style="text-align: center;">체크아웃</th>
+        <th width="100" style="text-align: center;">객실</th>
+    </tr>
+    </thead>
+    <tr th:each="reserve : ${reserves}">
+        <td style="text-align: center;" th:text="${reserve.date}"></td>
+        <td style="text-align: center;" th:text="${reserve.date.plusDays(1)}"></td>
+        <td style="text-align: center;" th:text="${reserve.getRoom().getRoomNo()}"></td>
+    </tr>
+</table>
 
+<hr>
 <h1>내가 쓴 글</h1>
 <div>
     <table>
