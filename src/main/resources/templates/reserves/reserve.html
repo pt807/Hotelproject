@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments/header :: header">
     <title>board</title>
 </head>
@@ -12,19 +12,24 @@
     </div>
 
     <div>
-        <form th:action="@{reserve/complete}" method="post">
-            <label>체크인
-            <input type="date" id="nowDate">
-            </label>
-            <label>체크아웃
-            <input type="date">
-            </label>
-            <button type="submit">조회</button>
+        <form th:action="@{/reserve}" method="post">
+            <div>
+                <label for="checkIn">체크인</label>
+                <input type="date" id="checkIn" name="checkIn" required="required">
+                <label for="checkOut">체크아웃</label>
+                <input type="date" id="checkOut" name="checkOut" required="required">
+                <input type="button" value="조회" onclick="searchRoom()">
+            </div>
+            <div id="roomContent">
+            </div>
+            <button type="submit">예약하기</button>
         </form>
     </div>
+    <br><br><br>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 
-    <script>
-        document.getElementById('nowDate').valueAsDate = new Date();
+<script type="text/javascript">
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
@@ -36,12 +41,28 @@
             mm='0'+mm
         }
         today = yyyy+'-'+mm+'-'+dd;
-        document.getElementById("nowDate").setAttribute("min", today);
-    </script>
+        document.getElementById("checkIn").setAttribute("value", today);
+        document.getElementById("checkIn").setAttribute("min", today);
 
 
-<br/><br/><br/>
-</div>
-<div th:replace="fragments/footer :: footer"></div>
+        function searchRoom() {
+            $('#roomContent *').remove();
+            var checkIn = $('#checkIn').val();
+            var checkOut = $('#checkOut').val();
+            $.ajax({
+                url:'/reserve/searchRoom',
+                type:'get',
+                data:{checkIn:checkIn, checkOut:checkOut},
+                success:function(rooms){
+                    $(rooms).each(function() {
+                        $('#roomContent').append($('<label><input type="radio" name="roomNo" required="required" value="' + this.roomNo + '">' + this.roomNo + '</label>'));
+                    });
+                },
+                error:function(){
+                    alert("에러입니다");
+                }
+            });
+        };
+</script>
 </body>
 </html>
