@@ -1,4 +1,4 @@
-package com.ptbh.kyungsunghotel.reseve;
+package com.ptbh.kyungsunghotel.reserve;
 
 import com.ptbh.kyungsunghotel.member.Member;
 import com.ptbh.kyungsunghotel.member.SessionConstants;

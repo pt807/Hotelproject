@@ -2,7 +2,7 @@
 package com.ptbh.kyungsunghotel.member;
 
 import com.ptbh.kyungsunghotel.board.Board;
-import com.ptbh.kyungsunghotel.reseve.Reserve;
+import com.ptbh.kyungsunghotel.reserve.Reserve;
 import lombok.Builder;
 import lombok.Data;
 
