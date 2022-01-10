@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReserveRepository extends JpaRepository<Reserve, Long> {
     List<Reserve> findAllByDateBetween(LocalDate checkIn, LocalDate checkOut);
+    void deleteReserveByReserveId(long reserveId);
 }

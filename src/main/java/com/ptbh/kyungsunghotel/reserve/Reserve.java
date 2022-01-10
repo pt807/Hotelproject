@@ -18,6 +18,9 @@ public class Reserve {
     private Long id;
 
     @Column
+    private long reserveId;
+
+    @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
@@ -33,8 +36,9 @@ public class Reserve {
     }
 
     @Builder
-    public Reserve(Long id, LocalDate date, Room room, Member member) {
+    public Reserve(Long id,  long reserveId, LocalDate date, Room room, Member member) {
         this.id = id;
+        this.reserveId = reserveId;
         this.date = date;
         this.room = room;
         this.member = member;

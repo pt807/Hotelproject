@@ -51,6 +51,7 @@ public class KyungsunghotelApplication {
 
 			reserveRepository.save(Reserve.builder()
 					.date(LocalDate.now())
+					.reserveId(1)
 					.room(roomRepository.findById("A101").orElse(null))
 					.member(memberRepository.findByLoginId("test").orElse(null))
 					.build()

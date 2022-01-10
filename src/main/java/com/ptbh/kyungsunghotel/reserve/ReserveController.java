@@ -34,14 +34,21 @@ public class ReserveController {
                           @RequestParam("checkOut") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOut,
                           @RequestParam("roomNo") String roomNo,
                           @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member) {
+        Long l = Long.parseLong("0");
         for (long day = 0; day < ChronoUnit.DAYS.between(checkIn, checkOut); day++) {
             Reserve reserve = new Reserve();
             reserve.setDate(checkIn.plusDays(day));
             reserve.setMember(member);
             reserve.setRoom(roomRepository.findById(roomNo).orElse(null));
             reserveRepository.save(reserve);
-        }
 
+            if (l.equals(Long.parseLong("0"))) {
+                l = reserve.getId();
+                reserve.setReserveId(l);
+            }
+            reserve.setReserveId(l);
+            reserveRepository.save(reserve);
+        }
         return "redirect:/member/info";
     }
 
@@ -58,4 +65,19 @@ public class ReserveController {
         rooms.removeAll(reserveRooms);
         return rooms;
     }
+
+    @GetMapping("/reserve/{id}")
+    public String reserveView(@PathVariable("id") Long id, Model model) {
+        Reserve reserve = reserveRepository.findById(id).orElse(null);
+        model.addAttribute("reserve", reserve);
+        return "/reserves/reserveView";
+    }
+
+    @GetMapping("/reserve/reserveDelete/{id}")
+    public String reserveDelete(@PathVariable("id") Long id) {
+        Reserve reserve = reserveRepository.findById(id).orElse(null);
+        reserveRepository.deleteReserveByReserveId(reserve.getReserveId());
+        return "redirect:/member/info";
+    }
+
 }
