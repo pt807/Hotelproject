@@ -79,5 +79,4 @@ public class ReserveController {
         reserveRepository.deleteByReserveId(reserve.getReserveId());
         return "redirect:/member/info";
     }
-
 }
