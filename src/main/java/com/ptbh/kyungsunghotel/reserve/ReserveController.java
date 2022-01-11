@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -44,7 +45,6 @@ public class ReserveController {
 
             if (l.equals(Long.parseLong("0"))) {
                 l = reserve.getId();
-                reserve.setReserveId(l);
             }
             reserve.setReserveId(l);
             reserveRepository.save(reserve);
@@ -76,7 +76,7 @@ public class ReserveController {
     @GetMapping("/reserve/reserveDelete/{id}")
     public String reserveDelete(@PathVariable("id") Long id) {
         Reserve reserve = reserveRepository.findById(id).orElse(null);
-        reserveRepository.deleteReserveByReserveId(reserve.getReserveId());
+        reserveRepository.deleteByReserveId(reserve.getReserveId());
         return "redirect:/member/info";
     }
 

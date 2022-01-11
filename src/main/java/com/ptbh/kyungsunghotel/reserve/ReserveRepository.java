@@ -2,10 +2,13 @@ package com.ptbh.kyungsunghotel.reserve;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface ReserveRepository extends JpaRepository<Reserve, Long> {
     List<Reserve> findAllByDateBetween(LocalDate checkIn, LocalDate checkOut);
-    void deleteReserveByReserveId(long reserveId);
+    long countByReserveId(long reserveId);
+    @Transactional
+    void deleteByReserveId(long reserveId);
 }

@@ -2,6 +2,9 @@ package com.ptbh.kyungsunghotel.member;
 
 import com.ptbh.kyungsunghotel.board.Board;
 import com.ptbh.kyungsunghotel.reserve.Reserve;
+import com.ptbh.kyungsunghotel.reserve.ReserveForm;
+import com.ptbh.kyungsunghotel.reserve.ReserveRepository;
+import com.ptbh.kyungsunghotel.reserve.ReserveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,14 +13,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MemberController {
     private final MemberRepository memberRepository;
+    private final ReserveRepository reserveRepository;
 
-    public MemberController(MemberRepository memberRepository) {
+    public MemberController(MemberRepository memberRepository, ReserveRepository reserveRepository) {
         this.memberRepository = memberRepository;
+        this.reserveRepository = reserveRepository;
     }
 
     @GetMapping("/member/login")
@@ -100,11 +107,24 @@ public class MemberController {
     // 회원 정보 조회
     @GetMapping("/member/info")
     public String showMemberInfo(@SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member, Model model) {
-        List<Reserve> reserves = memberRepository.findByLoginId(member.getLoginId()).orElse(null).getReserves();
         List<Board> boards = memberRepository.findByLoginId(member.getLoginId()).orElse(null).getBoards();
         boards.sort((o1, o2) -> o2.getBoardNo() - o1.getBoardNo());
 
-        model.addAttribute("reserves", reserves);
+        List<Reserve> reserves = memberRepository.findByLoginId(member.getLoginId()).orElse(null).getReserves();
+        List<ReserveForm> list = new ArrayList<>();
+
+        reserves = reserves.stream().filter(ReserveService.distinctByKey(Reserve::getReserveId)).collect(Collectors.toList());
+        for (Reserve reserve : reserves) {
+            ReserveForm reserveForm = new ReserveForm();
+            reserveForm.setId(reserve.getId());
+            reserveForm.setCheckIn(reserve.getDate());
+            reserveForm.setCheckOut(reserve.getDate().plusDays(reserveRepository.countByReserveId(reserve.getReserveId())));
+            reserveForm.setRoomNo(reserve.getRoom().getRoomNo());
+            list.add(reserveForm);
+        }
+
+//        model.addAttribute("reserves", reserves);
+        model.addAttribute("reserves", list);
         model.addAttribute("boards", boards);
         model.addAttribute("member", member);
         return "members/memberInfo";
