@@ -23,9 +23,6 @@
     </tr>
     </thead>
     <tr th:each="reserve : ${reserves}">
-<!--        <td style="text-align: center;" th:text="${reserve.date}"></td>-->
-<!--        <td style="text-align: center;" th:text="${reserve.date.plusDays(1)}"></td>-->
-<!--        <td style="cursor: pointer; text-align: center;"><a th:href="@{/reserve/{id}(id=${reserve.getId()})}" th:text="${reserve.getRoom().getRoomNo()}"></a></td>-->
         <td style="text-align: center;" th:text="${reserve.checkIn}"></td>
         <td style="text-align: center;" th:text="${reserve.checkOut}"></td>
         <td style="cursor: pointer; text-align: center;"><a th:href="@{/reserve/{id}(id=${reserve.id})}" th:text="${reserve.roomNo}"></a></td>

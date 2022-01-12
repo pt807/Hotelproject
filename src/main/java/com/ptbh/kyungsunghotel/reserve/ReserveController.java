@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ReserveController {
@@ -68,8 +68,15 @@ public class ReserveController {
 
     @GetMapping("/reserve/{id}")
     public String reserveView(@PathVariable("id") Long id, Model model) {
-        Reserve reserve = reserveRepository.findById(id).orElse(null);
-        model.addAttribute("reserve", reserve);
+        Reserve reserves = reserveRepository.findById(id).orElse(null);
+
+        ReserveForm reserveForm = new ReserveForm();
+        reserveForm.setCheckIn(reserves.getDate());
+        reserveForm.setCheckOut(reserves.getDate().plusDays(reserveRepository.countByReserveId(reserves.getReserveId())));
+        reserveForm.setRoomNo(reserves.getRoom().getRoomNo());
+        reserveForm.setName(reserves.getMember().getName());
+
+        model.addAttribute("reserve", reserveForm);
         return "/reserves/reserveView";
     }
 

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 @Data
 public class ReserveForm {
-
     private Long id;
 
     private LocalDate checkIn;
@@ -14,4 +13,6 @@ public class ReserveForm {
     private LocalDate checkOut;
 
     private String roomNo;
+
+    private String name;
 }
