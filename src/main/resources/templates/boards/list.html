@@ -4,79 +4,84 @@
     <title>board</title>
 </head>
 <body>
-<div th:replace="fragments/navbar :: navbar"></div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 <div>
-
     <div style="padding: 10px; text-align: center;">
         <h1><a style="text-decoration: none;">고객센터</a></h1>
     </div>
 
-    <div>총 건수 : <span th:text="${cnt}"></span> </div>
     <br>
-    <div>
-        <table>
-            <thead style="text-align: center;">
+    <div class="container-sm">
+        <table class="table table-hover">
+            <small class="text-muted"> 총 건수 : <span th:text="${cnt}"></span></small>
+            <thead>
             <tr>
-                <th style="text-align: center;">순서</th>
-                <th style="text-align: center;">작성자</th>
-                <th style="text-align: center;">제목</th>
-                <th style="text-align: center;">작성일</th>
+                <th scope="col">순서</th>
+                <th scope="col">작성자</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성일</th>
             </tr>
             </thead>
-            <tr th:each="board : ${boards}">
+            <tbody>
+            <tr scope="row" th:each="board : ${boards}">
                 <td th:text="${board.boardNo}"></td>
                 <td th:text="${board.getMember().getName()}"></td>
-                <td style="cursor: pointer; text-align: center;"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
+                <td style="cursor: pointer"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
                 <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
         </table>
+        <div th:if ="${session.loginMember != null}"; style="text-align: right">
+            <button class="btn btn-primary" onclick="location.href='/board/post'">글작성</button>
+        </div>
     </div>
     <br>
 
     <form class="search" method="get" th:action="@{/board/list}">
-    <select name="searchField" th:value="${param.searchField}">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+        <select class="form-select" name="searchField" th:value="${param.searchField}">
         <option value="title" th:selected="${searchField == 'title' ? true : false}">제목검색</option>
         <option value="title2" th:selected="${searchField == 'title2' ? true : false}">제목+내용</option>
         <option value="writer" th:selected="${searchField == 'writer' ? true : false}">작성자검색</option>
-    </select>
-
-        <div class="search box">
-            <input type="text" class="box" id="searchText" name="searchText" th:value="${param.searchText}">
-        </div>
-        <div class="search button">
-            <button type="submit" class="button">검색</button>
+        </select>
+                </div>
+                <div class="col col-lg-3">
+                    <input type="text" class="form-control" id="searchText" name="searchText" th:value="${param.searchText}">
+                </div>
+                <div class="col-md-auto">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">검색</button>
+                </div>
+            </div>
         </div>
     </form>
-    <br>
-
-    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=0, searchField=${param.searchField}, searchText=${param.searchText})}">&laquo;</a>
-    <a th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2, searchField=${param.searchField}, searchText=${param.searchText})}">&lsaquo;</a>
+    <br><br>
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" th:if="${nowPage > 1}" th:href="@{/board/list(page=0, searchField=${param.searchField}, searchText=${param.searchText})}">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" th:if="${nowPage > 1}" th:href="@{/board/list(page=${nowPage} -2, searchField=${param.searchField}, searchText=${param.searchText})}">&lsaquo;</a></li>
 
     <th:block th:if="${totalPage <= 10}" th:each ="i : ${#numbers.sequence(1, totalPage)}">
-        <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${i}"></a>
-        <strong th:if="${i == nowPage}"  th:text="${i}"></strong>
+        <li class="page-item"><a class="page-link" th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${i}"></a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" th:if="${i == nowPage}" th:text="${i}"></a></li>
     </th:block>
 
     <th:block th:if="${totalPage > 10}">
 
         <th:block th:if="${nowPage <= 6}" th:each ="i : ${#numbers.sequence(startPage, 10)}">
-            <a th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${i}"></a>
-            <strong th:if="${i == nowPage}"  th:text="${i}"></strong>
+        <li class="page-item"><a class="page-link" th:if="${i != nowPage}" th:href="@{/board/list(page = ${i - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${i}"></a></li>
+            <li class="page-item active" aria-current="page"><a class="page-link" th:if="${i == nowPage}" th:text="${i}"></a></li>
         </th:block>
 
         <th:block th:if="${nowPage > 6}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${page}"></a>
-            <strong th:if="${page == nowPage}"  th:text="${page}"></strong>
+        <li class="page-item"><a class="page-link" th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchField=${param.searchField}, searchText=${param.searchText})}" th:text="${page}"></a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" th:if="${page == nowPage}"  th:text="${page}"></a></li>
         </th:block>
 
     </th:block>
 
-    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage}, searchField=${param.searchField}, searchText=${param.searchText})}">&rsaquo;</a>
-    <a th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage - 1}, searchField=${param.searchField}, searchText=${param.searchText})}">&raquo;</a>
-
-    <div th:if ="${session.loginMember != null}"; style="text-align: right">
-        <button onclick="location.href='/board/post'">글작성</button>
-    </div>
+        <li class="page-item"><a class="page-link" th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${nowPage}, searchField=${param.searchField}, searchText=${param.searchText})}">&rsaquo;</a></li>
+        <li class="page-item"><a class="page-link" th:if="${nowPage < totalPage}" th:href="@{/board/list(page=${totalPage - 1}, searchField=${param.searchField}, searchText=${param.searchText})}">&raquo;</a></li>
+    </ul>
 
     <br/><br/><br/>
 </div>
