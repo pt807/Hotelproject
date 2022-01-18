@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <title>login</title>
+<head>
+    <div th:replace="fragments/header :: header"></div>
+    <title>마이페이지</title>
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<h1>회원 정보</h1>
-<h2>
-    <span th:text="${member.name}">name</span>
-</h2>
-<button type="button" th:onclick="|location.href='@{/member/update}'|">정보수정</button>
-<button type="button" th:onclick="|location.href='@{/member/changePassword}'|">비밀번호 변경</button>
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">회원 정보</h2>
+        </div>
+        <div class="card-body">
+            <p>이름: <span th:text="${member.name}"></span></p>
+            <p>이메일: <span th:text="${member.email}"></span></p>
+            <p>전화번호: <span th:text="${member.telephone}"></span></p>
+            <button type="button" class="btn btn-primary mb-2" th:onclick="|location.href='@{/member/update}'|">정보 수정</button>
+            <button type="button" class="btn btn-primary mb-2" th:onclick="|location.href='@{/member/changePassword}'|">비밀번호 변경</button>
+            <button type="button" class="btn btn-danger btn-primary mb-2" onclick="location.href='/member/withdraw';">회원 탈퇴</button>
+        </div>
+    </div>
 
-<hr>
-<h1>예약 조회</h1>
-<table width="300">
-    <thead style="text-align: center;">
-    <tr>
-        <th width="100" style="text-align: center;">체크인</th>
-        <th width="100" style="text-align: center;">체크아웃</th>
-        <th width="100" style="text-align: center;">객실</th>
-    </tr>
-    </thead>
-    <tr th:each="reserve : ${reserves}">
-        <td style="text-align: center;" th:text="${reserve.checkIn}"></td>
-        <td style="text-align: center;" th:text="${reserve.checkOut}"></td>
-        <td style="cursor: pointer; text-align: center;"><a th:href="@{/reserve/{id}(id=${reserve.id})}" th:text="${reserve.roomNo}"></a></td>
-    </tr>
-</table>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="text-center">예약 조회</h2>
+        </div>
+        <div class="row card-body justify-content-center">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">체크인</th>
+                    <th scope="col">체크아웃</th>
+                    <th scope="col">객실</th>
+                </tr>
+                </thead>
+                <tr scope="row" th:each="reserve : ${reserves}">
+                    <td th:text="${reserve.checkIn}"></td>
+                    <td th:text="${reserve.checkOut}"></td>
+                    <td><a th:href="@{/reserve/{id}(id=${reserve.id})}" th:text="${reserve.roomNo}"></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-<hr>
-<h1>내가 쓴 글</h1>
-<div>
-    <table>
-        <thead style="text-align: center;">
-        <tr>
-            <th style="text-align: center;">제목</th>
-            <th style="text-align: center;">작성일</th>
-        </tr>
-        </thead>
-        <tr th:each="board : ${boards}">
-            <td style="cursor: pointer; text-align: center;"><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
-            <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        </tr>
-    </table>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="text-center">내가 쓴 글</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성일</th>
+                </tr>
+                </thead>
+                <tr scope="row" th:each="board : ${boards}">
+                    <td><a th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.title}"></a></td>
+                    <td th:text="${#temporals.format(board.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
