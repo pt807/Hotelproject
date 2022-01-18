@@ -20,7 +20,7 @@ public class Board {
     @NotBlank(message = "제목은 필수입니다")
     private String title;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     @NotBlank(message = "내용은 필수입니다")
     private String content;
 
