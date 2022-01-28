@@ -3,14 +3,14 @@
 <head th:replace="fragments/header :: header">
     <title>postUpdate</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <div style="padding: 10px; text-align: center;">
-        <h1><a style="text-decoration: none;">게시글수정</a></h1>
+        <h3><a style="text-decoration: none;">게시글수정</a></h3>
     </div>
 
-    <div class="container-sm">
+    <div class="container-sm" style="width: 900px;">
         <form role="form" th:object="${postUpdate}" th:action="@{/board/postUpdate/{boardNo}(boardNo=${postUpdate.boardNo})}"
               method="post" enctype="multipart/form-data">
 
@@ -28,13 +28,11 @@
             </div>
 
             <div style="text-align: right;">
-                <input type="button" class="btn btn-primary" th:value="목록" onclick="location.href='/board/list';" >
-                <button type="submit" class="btn btn-primary">수정</button>
+                <input type="button" class="btn btn-outline-secondary" th:value="목록" onclick="location.href='/board/list';" >
+                <button type="submit" class="btn btn-dark">수정</button>
             </div>
         </form>
     </div>
-    <br/><br/><br/>
-
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
