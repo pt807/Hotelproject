@@ -1,55 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head th:replace="fragments/header :: header">
-    <title>KYUNGSUNG hotel</title>
+    <title>Kyung Sung Hotel</title>
 </head>
 
-<body>
-<div th:replace="fragments/navbar :: navbar"></div>
-    <div class="intro">
-                    <span style=" font-weight: 545;font-size: 35px;">
-                        <br>KYUNG SUNG IS ETERNAL JOURNEY</span>
-        <br><br>
-        경성호텔은 오늘도 새로운 여행을 준비하고 있습니다. <br>
-        경성 고유의 철학 아래에 완전히 새로운 콘셉트의 경험을 만들어 냅니다.<br>
-        우리가 지금껏 예상할 수 있었던 범주를 넘어선 독보적인 콘텐츠로<br>
-        경성은 오늘도 변화하고 있습니다.<br>
-        <br><br><br>
-    </div>
-
-    <div class="main img" style="padding: 0 50px; text-align: center; margin-bottom: 100px">
-        <img src="img/cv_salon.jpg" height="927" width="1440"/>
-    </div>
-
-    <div class="video" style="padding: 100px 50px 50px;">
-        <div class="youtube" style="position: relative; float: left; width: 66%; padding-bottom: 40%;">
-            <iframe style="position: absolute; width: 100%; height: 100%;"
-                    src="https://www.youtube.com/embed/Uj-grGgMNqk?rel=0" allowfullscreen></iframe>
-        </div>
-
-        <div class="slo" style="float: left; width: 33%;">
-            <p style="text-align: center;  font-weight: 300; font-size: 20px; padding: 30px; float: right; margin-right: 60px">
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container">
+    <div class="justify-content-center">
+        <div class="mt-5">
+            <h2 class="text-center mb-4" style="margin-top: 100px;">KYUNG SUNG IS ETERNAL JOURNEY</h2>
+            <p class="text-center" style="margin-bottom: 80px;">
+                경성호텔은 오늘도 새로운 여행을 준비하고 있습니다.
                 <br>
-                <span style="font-weight: 500;font-size: 25px;">
-                            외국보다 더 라이브한 오후 12시 <br>
-                            이터널저니 남해<br>
-                            @ 경성호텔
-                            </span>
-                <br><br>
-                이터널저니의 하루는 <br>
-                누구보다도 일찍 시작합니다.<br>
+                경성 고유의 철학 아래에 완전히 새로운 콘셉트의 경험을 만들어 냅니다.
                 <br>
-                가장 신선한 재료에 대한 고집.<br>
-                가장 풍성한 맛을 향한 정성.<br>
+                우리가 지금껏 예상할 수 있었던 범주를 넘어선 독보적인 콘텐츠로
                 <br>
-                우리는 테이블에서 <br>
-                바다를 만나게 됩니다.
+                경성은 오늘도 변화하고 있습니다.
             </p>
         </div>
-        <div style="clear:both; margin-bottom: 100px;">
-
+        <div id="carouselControls" class="carousel slide mt-5" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="6" aria-label="Slide 7"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="img/hotelView1.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/hotelView2.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/hotelView3.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/hotelView4.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/hotelView5.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/hotelView6.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/hotelView7.jpg" class="d-block w-100 h-100" alt="hotelView">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+        <div class="my-auto" style="height: 120px"></div>
+        <div class="row my-5">
+            <div class="col-lg-8">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/Uj-grGgMNqk?rel=0" title="YouTube video" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <div class="d-flex flex-column h-100 justify-content-center">
+                    <h4 class="text-center">
+                        외국보다 더 라이브한 오후 12시
+                        <br>
+                        이터널저니 남해 @ 경성호텔
+                    </h4>
+                    <p class="text-center">
+                        이터널저니의 하루는 누구보다도 일찍 시작합니다.
+                        <br>
+                        가장 신선한 재료에 대한 고집.
+                        <br>
+                        가장 풍성한 맛을 향한 정성.
+                        <br>
+                        우리는 테이블에서 바다를 만나게 됩니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="my-auto" style="height: 120px"></div>
     </div>
+</div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

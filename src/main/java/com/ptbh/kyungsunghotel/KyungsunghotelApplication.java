@@ -43,9 +43,9 @@ public class KyungsunghotelApplication {
 					)
 			);
 
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 1; i <= 4; i++) {
 				for (int j = 1; j <= 4; j++) {
-					roomRepository.save(Room.builder().roomNo("A" + i + "0" + j).state("").build());
+					roomRepository.save(Room.builder().roomNo("A" + i + "0" + j).state("").price(i * 50000).build());
 				}
 			}
 
@@ -54,6 +54,8 @@ public class KyungsunghotelApplication {
 					.reserveId(1)
 					.room(roomRepository.findById("A101").orElse(null))
 					.member(memberRepository.findByLoginId("test").orElse(null))
+					.personnel(2)
+					.reservePrice(70000)
 					.build()
 			);
 		};

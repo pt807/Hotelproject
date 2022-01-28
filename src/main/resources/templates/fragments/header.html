@@ -1,4 +1,4 @@
-<div th:fragment="header">
+<head th:fragment="header">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,5 +15,24 @@
         ul li { list-style-type: none;}
         a:link { color: black; text-decoration: none;}
         a:visited { color: black; text-decoration: none;}
+
+        .nav-item {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-property: transform;
+            transition-property: transform;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+        }
+
+        .nav-item:hover, .nav-item:focus, .nav-item:active {
+            -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+        }
     </style>
-</div>
+</head>
