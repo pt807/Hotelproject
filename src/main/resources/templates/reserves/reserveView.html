@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments/header :: header">
-    <title>board</title>
+    <title>reserveView</title>
 </head>
-<body>
-<div th:replace="fragments/navbar :: navbar"></div>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
-<div style="padding: 10px; text-align: center;">
-    <h1><a style="text-decoration: none;">예약 상세 페이지</a></h1>
-</div>
-
-<div>
-    <div>
-        <div>
-            <label style="font-weight: bolder;">체크인</label>
-            <p th:text="${reserve.checkIn}"></p>
+<div class="container py-5" style="text-align: -webkit-center;">
+    <div class="card" style="width: 900px; text-align: -webkit-left;">
+        <div class="card-header">
+            <h4 class="text-center">예약 상세 페이지</h4>
         </div>
-        <div>
-            <label style="font-weight: bolder;">체크아웃</label>
-            <p th:text="${reserve.checkOut}"></p>
+        <div class="card-body">
+            <div style="display: flex;">
+                <label style="font-weight: bolder;">객실:&nbsp;</label>
+                <p th:text="${reserve.roomNo}"></p>
+            </div>
+            <div style="display: flex;">
+                <label style="font-weight: bolder;">체크인:&nbsp;</label>
+                <p th:text="${reserve.checkIn}"></p>
+            </div>
+            <div style="display: flex;">
+                <label style="font-weight: bolder;">체크아웃:&nbsp;</label>
+                <p th:text="${reserve.checkOut}"></p>
+            </div>
+            <div style="display: flex;">
+                <label style="font-weight: bolder;">예약자:&nbsp;</label>
+                <p th:text="${reserve.name}"></p>
+            </div>
+            <div style="display: flex;">
+                <label style="font-weight: bolder;">인원:&nbsp;</label>
+                <p th:text="${reserve.personnel}"></p>
+            </div>
+            <div style="display: flex;">
+                <label style="font-weight: bolder;">결제 금액:&nbsp;</label>
+                <p th:text="${reserve.reservePrice}"></p>
+            </div>
+            <div style="text-align: end; margin: 20px;">
+                <button type="button"  class="btn btn-outline-secondary" onclick="location.href='/member/info';" >마이페이지</button>
+                <button type="button" class="btn btn-dark" th:onclick="|location.href='@{/reserve/reserveDelete/{id}(id=${reserve.id})}'|">예약 취소</button>
+            </div>
         </div>
-        <div>
-            <label style="font-weight: bolder;">예약자</label>
-            <p th:text="${reserve.name}"></p>
-        </div>
-        <div>
-            <label style="font-weight: bolder;">객실</label>
-            <p th:text="${reserve.roomNo}"></p>
-        </div>
-
-        <div style="text-align: right;">
-            <button type="button" onclick="location.href='/member/info';" >마이페이지</button>
-            <button type="button" th:onclick="|location.href='@{/reserve/reserveDelete/{id}(id=${reserve.getId()})}'|">예약 취소</button>
-
-        </div>
-
     </div>
 </div>
-<br/><br/><br/>
-</div>
-
-
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+
 public class Room {
     @Id
     @Column
@@ -15,12 +16,16 @@ public class Room {
     @Column
     private String state;
 
+    @Column
+    private Integer price;
+
     public Room(){
     }
 
     @Builder
-    public Room(String roomNo, String state){
+    public Room(String roomNo, String state, Integer price){
         this.roomNo = roomNo;
         this.state = state;
+        this.price = price;
     }
 }

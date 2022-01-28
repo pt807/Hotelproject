@@ -15,4 +15,8 @@ public class ReserveForm {
     private String roomNo;
 
     private String name;
+
+    private Integer personnel;
+
+    private Integer reservePrice;
 }

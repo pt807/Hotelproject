@@ -1,5 +1,6 @@
 package com.ptbh.kyungsunghotel.reserve;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ptbh.kyungsunghotel.member.Member;
 import com.ptbh.kyungsunghotel.room.Room;
 import lombok.Builder;
@@ -24,8 +25,15 @@ public class Reserve {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column
+    private Integer personnel;
+
+    @Column
+    private Integer reservePrice;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_no")
+    @JsonIgnore
     private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,10 +44,12 @@ public class Reserve {
     }
 
     @Builder
-    public Reserve(Long id,  long reserveId, LocalDate date, Room room, Member member) {
+    public Reserve(Long id,  long reserveId, LocalDate date, Integer personnel, Integer reservePrice, Room room, Member member) {
         this.id = id;
         this.reserveId = reserveId;
         this.date = date;
+        this.personnel = personnel;
+        this.reservePrice = reservePrice;
         this.room = room;
         this.member = member;
     }
