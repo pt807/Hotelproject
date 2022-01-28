@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header"></div>
-    <title>회원 정보 수정</title>
+<head th:replace="fragments/header :: header">
+    <title>memberUpdate</title>
 </head>
-<body>
-<div th:replace="fragments/navbar :: navbar"></div>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container py-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-8 col-sm-8 col-md-6 col-lg-5 col-xl-4">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="text-center">회원 정보 수정</h2>
+                    <h4 class="text-center">회원 정보 수정</h4>
                 </div>
                 <div class="card-body">
                     <form th:action="@{/member/update}" th:object="${updateForm}" method="post">
@@ -34,8 +33,8 @@
                             <p th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Incorrect date</p>
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-block mb-2">수정</button>
-                            <button type="button" class="btn btn-danger btn-primary btn-block" onclick="location.href='/member/info';">취소</button>
+                            <button type="submit" class="btn btn-dark mb-2">수정</button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="location.href='/member/info';">취소</button>
                         </div>
                     </form>
                 </div>

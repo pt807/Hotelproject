@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="fragments/header :: header"></div>
-    <title>마이페이지</title>
+<head th:replace="fragments/header :: header">
+    <title>memberInfo</title>
 </head>
-<body>
-<div th:replace="fragments/navbar :: navbar"></div>
-<div class="container py-5">
-    <div class="card">
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container py-5" style="text-align: -webkit-center;">
+    <div class="card" style="width: 900px; text-align: -webkit-left;">
         <div class="card-header">
-            <h2 class="text-center">회원 정보</h2>
+            <h4 class="text-center">회원 정보</h4>
         </div>
         <div class="card-body">
             <p>이름: <span th:text="${member.name}"></span></p>
             <p>이메일: <span th:text="${member.email}"></span></p>
             <p>전화번호: <span th:text="${member.telephone}"></span></p>
-            <button type="button" class="btn btn-primary mb-2" th:onclick="|location.href='@{/member/update}'|">정보 수정</button>
-            <button type="button" class="btn btn-primary mb-2" th:onclick="|location.href='@{/member/changePassword}'|">비밀번호 변경</button>
-            <button type="button" class="btn btn-danger btn-primary mb-2" onclick="location.href='/member/withdraw';">회원 탈퇴</button>
+            <div style="text-align: end;">
+                <button type="button" class="btn btn-dark" th:onclick="|location.href='@{/member/update}'|">정보 수정</button>
+                <button type="button" class="btn btn-dark" th:onclick="|location.href='@{/member/changePassword}'|">비밀번호 변경</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='/member/withdraw';">회원 탈퇴</button>
+            </div>
         </div>
     </div>
 
-    <div class="card mt-5">
+    <div class="card mt-5" style="width: 900px;">
         <div class="card-header">
-            <h2 class="text-center">예약 조회</h2>
+            <h4 class="text-center">예약 조회</h4>
         </div>
         <div class="row card-body justify-content-center">
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th scope="col">객실</th>
                     <th scope="col">체크인</th>
                     <th scope="col">체크아웃</th>
-                    <th scope="col">객실</th>
+                    <th scope="col">예약자</th>
+
                 </tr>
                 </thead>
                 <tr scope="row" th:each="reserve : ${reserves}">
+                    <td><a th:href="@{/reserve/{id}(id=${reserve.id})}" th:text="${reserve.roomNo}"></a></td>
                     <td th:text="${reserve.checkIn}"></td>
                     <td th:text="${reserve.checkOut}"></td>
-                    <td><a th:href="@{/reserve/{id}(id=${reserve.id})}" th:text="${reserve.roomNo}"></a></td>
+                    <td th:text="${reserve.name}"></td>
                 </tr>
             </table>
         </div>
     </div>
 
-    <div class="card mt-5">
+    <div class="card mt-5" style="width: 900px; margin-bottom: 150px;">
         <div class="card-header">
-            <h2 class="text-center">내가 쓴 글</h2>
+            <h4 class="text-center">내가 쓴 글</h4>
         </div>
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">제목</th>
+                    <th scope="col" style="width: 80%;">제목</th>
                     <th scope="col">작성일</th>
                 </tr>
                 </thead>

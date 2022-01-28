@@ -120,6 +120,9 @@ public class MemberController {
             reserveForm.setCheckIn(reserve.getDate());
             reserveForm.setCheckOut(reserve.getDate().plusDays(reserveRepository.countByReserveId(reserve.getReserveId())));
             reserveForm.setRoomNo(reserve.getRoom().getRoomNo());
+            reserveForm.setName(reserve.getMember().getName());
+            reserveForm.setPersonnel(reserve.getPersonnel());
+            reserveForm.setReservePrice(reserve.getReservePrice());
             list.add(reserveForm);
         }
 
