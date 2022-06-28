@@ -12,7 +12,7 @@
 
     <div class="container">
         <form th:action="@{/reserve}" method="post" id="reserveForm">
-                    <div class="card " style="height: 100px; text-align: center; width: 900px; margin: auto;">
+                    <div class="card container-sm" style="height: 100px; text-align: center; width: 900px; margin: auto;">
                         <div class="d-flex justify-content-around" style="margin-block: auto;">
                             <div class="d-flex flex-column bd-highlight mb-3">
                                 <label class="card-text" for="checkIn">체크인</label>
@@ -38,13 +38,13 @@
                     </div>
 
             <div class="row row-cols-1 row-cols-md-2 g-4" id="roomContent" style="flex-direction: column; align-content: center; margin-top: 50px;">
-                <div class="col" id="A101" style="width: 930px;">
+                <div class="col" id="A101" style="width: 600px; align-self: center;">
                     <div class="card mb-3" >
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_tw.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_tw.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A101</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -54,7 +54,7 @@
                                         <br>
                                         최선의 서비스로 고객의 편리함을 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A101price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A101')">예약하기</button>
                                     </div>
                                 </div>
@@ -62,13 +62,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A102" style="width: 930px;">
+                <div class="col" id="A102" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_tw.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_tw.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A102</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -78,7 +78,7 @@
                                         <br>
                                         최선의 서비스로 고객의 편리함을 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A102price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A102')">예약하기</button>
                                     </div>
                                 </div>
@@ -86,13 +86,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A103" style="width: 930px;">
+                <div class="col" id="A103" style="width: 600px; align-self: center;">
                     <div class="card mb-3" >
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_tw.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_tw.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A103</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -102,7 +102,7 @@
                                         <br>
                                         최선의 서비스로 고객의 편리함을 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A103price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A103')">예약하기</button>
                                     </div>
                                 </div>
@@ -110,13 +110,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A104" style="width: 930px;">
+                <div class="col" id="A104" style="width: 600px; align-self: center;">
                     <div class="card mb-3" >
                         <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="/img/hotel_tw.jpg" height="250" width="300"/>
+                            <div class="col-md-12">
+                                <img src="/img/hotel_tw.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A104</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -126,7 +126,7 @@
                                         <br>
                                         최선의 서비스로 고객의 편리함을 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A104price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A104')">예약하기</button>
                                     </div>
                                 </div>
@@ -134,13 +134,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A201" style="width: 930px;">
+                <div class="col" id="A201" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="/img/hotel_dd.jpg" height="250" width="300"/>
+                            <div class="col-md-12">
+                                <img src="/img/hotel_dd.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A201</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -150,7 +150,7 @@
                                         <br>
                                         최고 수준의 편리함과 품격, 세련미를 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A201price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A201')">예약하기</button>
                                     </div>
                                 </div>
@@ -158,13 +158,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A202" style="width: 930px;">
+                <div class="col" id="A202" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_dd.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_dd.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A202</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -174,7 +174,7 @@
                                         <br>
                                         최고 수준의 편리함과 품격, 세련미를 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A202price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A202')">예약하기</button>
                                     </div>
                                 </div>
@@ -182,13 +182,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A203" style="width: 930px;">
+                <div class="col" id="A203" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_dd.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_dd.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A203</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -198,7 +198,7 @@
                                         <br>
                                         최고 수준의 편리함과 품격, 세련미를 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A203price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A203')">예약하기</button>
                                     </div>
                                 </div>
@@ -206,13 +206,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A204" style="width: 930px;">
+                <div class="col" id="A204" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_dd.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_dd.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A204</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -222,7 +222,7 @@
                                         <br>
                                         최고 수준의 편리함과 품격, 세련미를 느낄 수 있게 마련되어 있습니다.</p>
                                     <p class="card-text" id="A204price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A204')">예약하기</button>
                                     </div>
                                 </div>
@@ -230,13 +230,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A301" style="width: 930px;">
+                <div class="col" id="A301" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_sj.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_sj.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A301</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -246,7 +246,7 @@
                                         <br>
                                         시설을 완비하고 있어 사시사철 불편함이 없이 이용하실수 있습니다.</p>
                                     <p class="card-text" id="A301price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A301')">예약하기</button>
                                     </div>
                                 </div>
@@ -254,13 +254,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A302" style="width: 930px;">
+                <div class="col" id="A302" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_sj.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_sj.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A302</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -270,7 +270,7 @@
                                         <br>
                                         시설을 완비하고 있어 사시사철 불편함이 없이 이용하실수 있습니다.</p>
                                     <p class="card-text" id="A302price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A302')">예약하기</button>
                                     </div>
                                 </div>
@@ -278,13 +278,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A303" style="width: 930px;">
+                <div class="col" id="A303" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_sj.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_sj.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A303</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -294,7 +294,7 @@
                                         <br>
                                         시설을 완비하고 있어 사시사철 불편함이 없이 이용하실수 있습니다.</p>
                                     <p class="card-text" id="A303price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A303')">예약하기</button>
                                     </div>
                                 </div>
@@ -302,13 +302,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A304" style="width: 930px;">
+                <div class="col" id="A304" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_sj.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_sj.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A304</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -318,7 +318,7 @@
                                         <br>
                                         시설을 완비하고 있어 사시사철 불편함이 없이 이용하실수 있습니다.</p>
                                     <p class="card-text" id="A304price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A304')">예약하기</button>
                                     </div>
                                 </div>
@@ -326,13 +326,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A401" style="width: 930px;">
+                <div class="col" id="A401" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_vip.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_vip.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A401</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -342,7 +342,7 @@
                                         <br>
                                         분리가 되어 있어서 손님 초대 및 소규모 회의에도 손색이 없는 객실입니다.</p>
                                     <p class="card-text" id="A401price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A401')">예약하기</button>
                                     </div>
                                 </div>
@@ -350,13 +350,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A402" style="width: 930px;">
+                <div class="col" id="A402" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_vip.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_vip.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A402</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -366,7 +366,7 @@
                                         <br>
                                         분리가 되어 있어서 손님 초대 및 소규모 회의에도 손색이 없는 객실입니다.</p>
                                     <p class="card-text" id="A402price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A402')">예약하기</button>
                                     </div>
                                 </div>
@@ -374,13 +374,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A403" style="width: 930px;">
+                <div class="col" id="A403" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_vip.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_vip.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A403</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -390,7 +390,7 @@
                                         <br>
                                         분리가 되어 있어서 손님 초대 및 소규모 회의에도 손색이 없는 객실입니다.</p>
                                     <p class="card-text" id="A403price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A403')">예약하기</button>
                                     </div>
                                 </div>
@@ -398,13 +398,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" id="A404" style="width: 930px;">
+                <div class="col" id="A404" style="width: 600px; align-self: center;">
                     <div class="card mb-3">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img src="/img/hotel_vip.jpg" height="250" width="300"/>
+                            <div class="col-md-12" >
+                                <img src="/img/hotel_vip.jpg" height="250" width="574">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <h5 class="card-title">A404</h5>
                                     <p class="card-text" style="line-height: 2;">
@@ -414,7 +414,7 @@
                                         <br>
                                         분리가 되어 있어서 손님 초대 및 소규모 회의에도 손색이 없는 객실입니다.</p>
                                     <p class="card-text" id="A404price"></p>
-                                    <div style="float: right; margin-right: 40px;">
+                                    <div style="float: right; margin-right: 40px; margin-bottom: 20px;">
                                     <button class="btn btn-outline-dark" style="align-self: center;" onclick="reserve('A404')">예약하기</button>
                                     </div>
                                 </div>
@@ -422,13 +422,13 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="col" id="A501" style="width: 930px;">-->
+<!--                <div class="col" id="A501" style="width: 600px; align-self: center;">-->
 <!--                    <div class="card mb-3">-->
 <!--                        <div class="row g-0">-->
-<!--                            <div class="col-md-4" >-->
-<!--                                <img src="img/hotelView1.jpg" height="300" width="300"/>-->
+<!--                            <div class="col-md-12" >-->
+<!--                                <img src="img/hotelView1.jpg" height="300" width="574"/>-->
 <!--                            </div>-->
-<!--                            <div class="col-md-8">-->
+<!--                            <div class="col-md-12">-->
 <!--                                <div class="card-body">-->
 <!--                                    <h5 class="card-title">A501</h5>-->
 <!--                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
@@ -439,13 +439,13 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-<!--                <div class="col" id="A502" style="width: 930px;">-->
+<!--                <div class="col" id="A502" style="width: 600px; align-self: center;">-->
 <!--                    <div class="card mb-3">-->
 <!--                        <div class="row g-0">-->
-<!--                            <div class="col-md-4" >-->
-<!--                                <img src="img/hotelView1.jpg" height="300" width="300"/>-->
+<!--                            <div class="col-md-12" >-->
+<!--                                <img src="img/hotelView1.jpg" height="300" width="574"/>-->
 <!--                            </div>-->
-<!--                            <div class="col-md-8">-->
+<!--                            <div class="col-md-12">-->
 <!--                                <div class="card-body">-->
 <!--                                    <h5 class="card-title">A502</h5>-->
 <!--                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
@@ -456,13 +456,13 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-<!--                <div class="col" id="A503" style="width: 930px;">-->
+<!--                <div class="col" id="A503" style="width: 600px; align-self: center;">-->
 <!--                    <div class="card mb-3">-->
 <!--                        <div class="row g-0">-->
-<!--                            <div class="col-md-4" >-->
-<!--                                <img src="img/hotelView1.jpg" height="300" width="300"/>-->
+<!--                            <div class="col-md-12" >-->
+<!--                                <img src="img/hotelView1.jpg" height="300" width="574"/>-->
 <!--                            </div>-->
-<!--                            <div class="col-md-8">-->
+<!--                            <div class="col-md-12">-->
 <!--                                <div class="card-body">-->
 <!--                                    <h5 class="card-title">A503</h5>-->
 <!--                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
@@ -473,13 +473,13 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-<!--                <div class="col" id="A504" style="width: 930px;">-->
+<!--                <div class="col" id="A504" style="width: 600px; align-self: center;">-->
 <!--                    <div class="card mb-3">-->
 <!--                        <div class="row g-0">-->
-<!--                            <div class="col-md-4" >-->
-<!--                                <img src="img/hotelView1.jpg" height="300" width="300"/>-->
+<!--                            <div class="col-md-12" >-->
+<!--                                <img src="img/hotelView1.jpg" height="300" width="574"/>-->
 <!--                            </div>-->
-<!--                            <div class="col-md-8">-->
+<!--                            <div class="col-md-12">-->
 <!--                                <div class="card-body">-->
 <!--                                    <h5 class="card-title">A504</h5>-->
 <!--                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
