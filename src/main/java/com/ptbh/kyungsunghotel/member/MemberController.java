@@ -34,7 +34,7 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public String login(@Validated LoginForm loginForm, BindingResult bindingResult,
+    public String login(@ModelAttribute("loginForm") @Validated LoginForm loginForm, BindingResult bindingResult,
                         HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "members/login";
@@ -69,7 +69,7 @@ public class MemberController {
     }
 
     @PostMapping("/member/join")
-    public String join(@Validated JoinForm joinForm, BindingResult bindingResult) {
+    public String join(@ModelAttribute("joinForm") @Validated JoinForm joinForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "members/join";
         }

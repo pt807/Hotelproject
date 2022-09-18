@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Reserve {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column

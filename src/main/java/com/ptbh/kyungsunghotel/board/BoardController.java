@@ -59,14 +59,14 @@ public class BoardController {
     @GetMapping("/board/post")
     public String showPost(Model model) {
         model.addAttribute("postForm", new PostForm());
-        return "/boards/post";
+        return "boards/post";
     }
 
     @PostMapping("/board/post")
     public String post(@Validated PostForm postForm, BindingResult bindingResult,
                        @SessionAttribute(value = SessionConstants.LOGIN_MEMBER, required = false) Member member) {
         if (bindingResult.hasErrors()) {
-            return "/boards/post";
+            return "boards/post";
         }
         Board board = new Board();
         board.setMember(member);
@@ -88,7 +88,7 @@ public class BoardController {
         postViewForm.setTitle(board.getTitle());
         postViewForm.setCreateTime(board.getCreateTime());
         model.addAttribute("postView", postViewForm);
-        return "/boards/postView";
+        return "boards/postView";
     }
 
     @GetMapping("/board/postUpdate/{boardNo}")

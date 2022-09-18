@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 public class Room {
     @Id
-    @Column
+    @Column(name = "room_no")
     private String roomNo;
 
     @Column

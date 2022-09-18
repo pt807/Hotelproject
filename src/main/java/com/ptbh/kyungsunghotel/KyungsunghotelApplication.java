@@ -25,39 +25,39 @@ public class KyungsunghotelApplication {
 		SpringApplication.run(KyungsunghotelApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner runner(MemberRepository memberRepository,
-									BoardRepository boardRepository,
-									RoomRepository roomRepository,
-									ReserveRepository reserveRepository) throws Exception {
-		return (args) -> {
-			memberRepository.save(Member.builder().loginId("test").password("test").name("홍길동").email("test@test.com").telephone("01012345678").build());
-
-			IntStream.rangeClosed(1, 300).forEach(index ->
-					boardRepository.save(Board.builder()
-							.member(memberRepository.findByLoginId("test").orElse(null))
-							.title("게시글 " + index)
-							.content("내용" + index)
-							.createTime(LocalDateTime.now())
-							.build()
-					)
-			);
-
-			for (int i = 1; i <= 4; i++) {
-				for (int j = 1; j <= 4; j++) {
-					roomRepository.save(Room.builder().roomNo("A" + i + "0" + j).state("").price(i * 50000).build());
-				}
-			}
-
-			reserveRepository.save(Reserve.builder()
-					.date(LocalDate.now())
-					.reserveId(1)
-					.room(roomRepository.findById("A101").orElse(null))
-					.member(memberRepository.findByLoginId("test").orElse(null))
-					.personnel(2)
-					.reservePrice(70000)
-					.build()
-			);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner(MemberRepository memberRepository,
+//									BoardRepository boardRepository,
+//									RoomRepository roomRepository,
+//									ReserveRepository reserveRepository) throws Exception {
+//		return (args) -> {
+//			memberRepository.save(Member.builder().loginId("test").password("test").name("홍길동").email("test@test.com").telephone("01012345678").build());
+//
+//			IntStream.rangeClosed(1, 300).forEach(index ->
+//					boardRepository.save(Board.builder()
+//							.member(memberRepository.findByLoginId("test").orElse(null))
+//							.title("게시글 " + index)
+//							.content("내용" + index)
+//							.createTime(LocalDateTime.now())
+//							.build()
+//					)
+//			);
+//
+//			for (int i = 1; i <= 4; i++) {
+//				for (int j = 1; j <= 4; j++) {
+//					roomRepository.save(Room.builder().roomNo("A" + i + "0" + j).state("").price(i * 50000).build());
+//				}
+//			}
+//
+//			reserveRepository.save(Reserve.builder()
+//					.date(LocalDate.now())
+//					.reserveId(1)
+//					.room(roomRepository.findById("A101").orElse(null))
+//					.member(memberRepository.findByLoginId("test").orElse(null))
+//					.personnel(2)
+//					.reservePrice(70000)
+//					.build()
+//			);
+//		};
+//	}
 }

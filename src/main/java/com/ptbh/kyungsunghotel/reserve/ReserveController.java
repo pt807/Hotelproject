@@ -26,7 +26,7 @@ public class ReserveController {
 
     @GetMapping("/reserve")
     public String showReserve(Model model) {
-        return "/reserves/reserve";
+        return "reserves/reserve";
     }
 
     @PostMapping("/reserve")
@@ -86,7 +86,7 @@ public class ReserveController {
         reserveForm.setReservePrice(reserves.getReservePrice());
 
         model.addAttribute("reserve", reserveForm);
-        return "/reserves/reserveView";
+        return "reserves/reserveView";
     }
 
     @GetMapping("/reserve/reserveDelete/{id}")

@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @Entity
 public class Board {
     @Id
-    @Column
+    @Column(name = "board_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer boardNo;
+    private int boardNo;
 
     @Column
     @NotBlank(message = "제목은 필수입니다")
